@@ -4,6 +4,7 @@ const App = () => {
   const [activeCategory, setActiveCategory] = useState('home');
   const [cart, setCart] = useState([]);
   const [showCart, setShowCart] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const products = {
     foods: [
@@ -284,7 +285,7 @@ const App = () => {
             <p className="text-xl text-gray-600">Your cart is empty</p>
             <button 
               onClick={() => setActiveCategory('home')}
-              className="mt-4 bg-orange-600 text-white px-6 py-3 rounded-lg hover:bg-orange-700 transition duration-300"
+              className="mt-4 bg-gray-500 text-white py-3 rounded-lg hover:bg-gray-600 transition duration-300"
             >
               Continue Shopping
             </button>
@@ -400,7 +401,7 @@ const App = () => {
           <div className="text-center p-6 bg-white rounded-lg shadow-lg">
             <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
               <svg className="w-6 h-6 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 00-5.879-1.376M12 11a3 3 0 110-6 3 3 0 010 6zm-1 8h2a2 2 0 012 2v1a2 2 0 01-2 2h-2a2 2 0 01-2-2v-1a2 2 0 012-2z" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 20h5v-2a3 3 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
             <h3 className="text-xl font-semibold mb-2">Family Recipes</h3>
@@ -612,10 +613,74 @@ const App = () => {
               </button>
               
               {/* Mobile menu button */}
-              <button className="md:hidden p-2 text-gray-700">
+              <button 
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="md:hidden p-2 text-gray-700 hover:text-orange-600 transition duration-300"
+                aria-label="Toggle menu"
+              >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={isMobileMenuOpen ? "M6 18L18 6M6 6l12 12" : "M4 6h16M4 12h16M4 18h16"} />
                 </svg>
+              </button>
+            </div>
+          </div>
+
+          {/* Mobile menu */}
+          <div className={`md:hidden ${isMobileMenuOpen ? 'block' : 'hidden'}`}>
+            <div className="px-2 pt-2 pb-3 space-y-1">
+              <button
+                onClick={() => {
+                  setActiveCategory('home');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                Home
+              </button>
+              <button
+                onClick={() => {
+                  setActiveCategory('foods');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                Non-Veg Pickles
+              </button>
+              <button
+                onClick={() => {
+                  setActiveCategory('sweets');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                Sweets
+              </button>
+              <button
+                onClick={() => {
+                  setActiveCategory('pickles');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                Pickles
+              </button>
+              <button
+                onClick={() => {
+                  setActiveCategory('about');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                About Us
+              </button>
+              <button
+                onClick={() => {
+                  setActiveCategory('contact');
+                  setIsMobileMenuOpen(false);
+                }}
+                className="block w-full text-left px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-orange-600 hover:bg-gray-50"
+              >
+                Contact Us
               </button>
             </div>
           </div>
